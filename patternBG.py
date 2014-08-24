@@ -1,9 +1,7 @@
 from __future__ import division  # so that 1/3=0.333 instead of 1/3=0
 __author__ = 'Horea Christian'
-from os import path, listdir, walk, remove, makedirs
-import numpy as np
 
-def patternBG(dimensions, hsv_means, hsv_variances = ["full", "full", "full"], increment_styles=["square"], stop=10, drop_shadows=0, shadow_value=-50, shadow_saturation=-30, shadow_increments=10, output="image.png", display=False, boost_first=2):
+def patternBG(dimensions, hsv_means, hsv_variances = ["full", "full", "full"], increment_styles=["square"], stop=10, drop_shadows=0, shadow_parameters=[-30,-50], shadow_length=10, output="image.png", display=False, boost_first=2):
 	"""
 	Function for creating randomly tiled images.
 	The tiling is dome by dividing the image into tiles based on the width and height common divisors.
@@ -17,13 +15,14 @@ def patternBG(dimensions, hsv_means, hsv_variances = ["full", "full", "full"], i
 	increment_styles -- A list specifying the tiling mode (square, horizontal, and vertical) for each tiling iteration in an ordinal fashion: if the list is shorter than the tiling increments the last attribute is repeated.
 	stop -- Pixel size of the smallest tile (tiling "stops" at this level, value should be >= 1, but be careful, for small values this may take a LOT of time).
 	drop_shadows -- Number of vertical drop shadows to apply to the image, `False` to apply none.
-	shadow_value -- The maximal value adjustment for shadows (please make sure that this number is evenly divided by `shadow_increments`).
-	shadow_saturation -- The maximal saturation adjustment for shadows (please make sure that this number is evenly divided by `shadow_increments`).
-	shadow_increments -- The number of increments (pixels) over which to fade the shadow (please make sure that this number evenly divides by `shadow_value` and `shadow_saturation`).
-	output -- Save image to this location (if relative, the path is calculated starting at `../patternBG/output/`)
-	bost_first -- how manyfold to increase the variance for the first (largest) set of tiles - this can be useful if you want to create more contrast for shadows.
+	shadow_parameters -- The maximal saturation and value (in this ordeer) adjustment for shadows - please make sure that these numbers are evenly divided by `shadow_length`.
+	shadow_length -- The number of increments (pixels) over which to fade the shadow (please make sure that this number evenly divides `shadow_parameters`).
+	output -- Save image to this location (if relative, the path is calculated starting at `../patternBG/output/`).
+	display -- `True` if you want to view the image (via Matplotlib) when the script executes.
+	boost_first -- How many fold to increase the variance for the first (largest) set of tiles - this can be useful if you want to create more contrast for shadows.
 	"""
 	from fractions import gcd
+	import numpy as np
 	import cv2
 	from itertools import product
 	from random import randrange
@@ -123,10 +122,10 @@ def patternBG(dimensions, hsv_means, hsv_variances = ["full", "full", "full"], i
 			else:
 				direction = -1
 				invert_offset = -1
-			for increment in np.arange(shadow_increments):
-				img[:,shadow_ix*max_tile_size+increment*direction+invert_offset,1] = img[:,shadow_ix*max_tile_size+increment*direction+invert_offset,1] + (shadow_saturation/shadow_increments*(shadow_increments-increment))
-			for increment in np.arange(shadow_increments):
-				img[:,shadow_ix*max_tile_size+increment*direction+invert_offset,2] = img[:,shadow_ix*max_tile_size+increment*direction+invert_offset,2] + (shadow_value/shadow_increments*(shadow_increments-increment))
+			for increment in np.arange(shadow_length):
+				img[:,shadow_ix*max_tile_size+increment*direction+invert_offset,1] = img[:,shadow_ix*max_tile_size+increment*direction+invert_offset,1] + (shadow_parameters[0]/shadow_length*(shadow_length-increment))
+			for increment in np.arange(shadow_length):
+				img[:,shadow_ix*max_tile_size+increment*direction+invert_offset,2] = img[:,shadow_ix*max_tile_size+increment*direction+invert_offset,2] + (shadow_parameters[1]/shadow_length*(shadow_length-increment))
 	
 	#convert image to RGB for plotting and saving:
 	img = cv2.cvtColor(img, cv2.COLOR_HSV2RGB)
