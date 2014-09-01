@@ -15,7 +15,7 @@ parser.add_argument("-p", "--shadow-parameters", help="2 integers specifying the
 parser.add_argument("-l", "--shadow-length", help="The number of increments (pixels) over which to fade the shadow (please make sure that this number evenly divides `shadow_parameters`).", type=int, default=10)
 parser.add_argument("-o", "--output", help="Save image to this location (if relative, the path is calculated starting at `../patternBG/output/`).", default="image.png")
 parser.add_argument("-y", "--display", help="Set this if you want to view the image (via Matplotlib) when the script executes.", action="store_true")
-parser.add_argument("-b", "--boost-first", help="How many fold to increase the variance for the first (largest) set of tiles - this can be useful if you want to create more contrast for shadows.", type=int, default=2)
+parser.add_argument("-b", "--boost-first", help="How many fold to increase the variance for the first (largest) set of tiles - this can be useful if you want to create more contrast for shadows.", type=int, default=1)
 args = parser.parse_args()
 
 patternBG.patternBG(args.dimensions, args.HSVmeans, hsv_variances=map(int, args.HSV_variances), increment_styles=args.increment_styles, stop=args.stop, drop_shadows=args.drop_shadows, shadow_parameters=args.shadow_parameters, shadow_length=args.shadow_length, output=args.output, display=args.display, boost_first=args.boost_first)

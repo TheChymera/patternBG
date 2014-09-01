@@ -1,7 +1,7 @@
 from __future__ import division  # so that 1/3=0.333 instead of 1/3=0
 __author__ = 'Horea Christian'
 
-def patternBG(dimensions, hsv_means, hsv_variances = ["full", "full", "full"], increment_styles=["square"], stop=10, drop_shadows=0, shadow_parameters=[-30,-50], shadow_length=10, output="image.png", display=False, boost_first=2):
+def patternBG(dimensions, hsv_means, hsv_variances = ["full", "full", "full"], increment_styles=["square"], stop=10, drop_shadows=0, shadow_parameters=[-30,-50], shadow_length=10, output="image.png", display=False, boost_first=1):
 	"""
 	Function for creating randomly tiled images.
 	The tiling is dome by dividing the image into tiles based on the width and height common divisors.
