@@ -1,12 +1,12 @@
-#patternBG
+# patternBG
 
 Python script which renders randomly tiled images.
 This can be used to produce GNOME3-like background images or other decorative artwork.
 The script can be interfaced with from the command line using the `patternBG_cli` command, and allows you to specify a plethora of parameters (see the "Usage" section below).
 
-##Installation
+## Installation
 
-####On [Gentoo Linux](http://en.wikipedia.org/wiki/Gentoo_linux) and [Derivatives](http://en.wikipedia.org/wiki/Category:Gentoo_Linux_derivatives):
+#### On [Gentoo Linux](http://en.wikipedia.org/wiki/Gentoo_linux) and [Derivatives](http://en.wikipedia.org/wiki/Category:Gentoo_Linux_derivatives):
 
 patternBG is available in the [Portage](http://en.wikipedia.org/wiki/Portage_(software)) *[chymerc overlay](https://github.com/TheChymera/chymeric)* as **[app-misc/RTbatch](https://github.com/TheChymera/chymeric/tree/master/app-misc/RTbatch)**.
 Just run the following command:
@@ -17,7 +17,7 @@ emerge RTbatch
 
 *If you are not yet using this overlay, it can be enabled with just two commands, as seen in [the README](https://github.com/TheChymera/chymeric).*
 
-####On all other Operating Systems:
+#### On all other Operating Systems:
 
 For all other Linux distributions or operating systems, the package can easily be installed via [pip](http://en.wikipedia.org/wiki/Pip_(Python)).
 This also handles all Python dependencies.
@@ -27,14 +27,14 @@ git clone https://github.com/TheChymera/patternBG.git your/local/repository/path
 pip install [--user] -e your/local/repository/path
 ```
 
-##Dependencies
+## Dependencies
 
 * **[NumPy](https://en.wikipedia.org/wiki/Numpy)** - in [Portage](http://en.wikipedia.org/wiki/Portage_(software)) as **app-text/texlive**
 * **[matplotlib](https://en.wikipedia.org/wiki/Matplotlib)** - in Portage as **dev-python/matplotlib**
 * **[scikit-image](http://scikit-image.org/)** - in Portage as **sci-libs/scikits_image**
 * **[OpenCV](http://en.wikipedia.org/wiki/Opencv)** - in Portage as **media-libs/opencv**
 
-##Usage    
+## Usage    
 Run the script either as `patternBG_cli` (if installed globally), or as `./patternBG_cli.py` from the containing folder:
 ```
 patternBG_cli   [-h] [-v HSV_VARIANCES HSV_VARIANCES HSV_VARIANCES]
@@ -51,7 +51,7 @@ patternBG_cli 2560 1440 100 200 190 -y -v 1 2 2 -i vertical square -s 20 -d 6 -b
 
 ```
 
-##Arguments:
+## Arguments:
 ```
 positional arguments:
   dimensions            2 integers specifying the desired image width and
