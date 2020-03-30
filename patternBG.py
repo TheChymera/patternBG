@@ -101,7 +101,9 @@ def patternBG(dimensions, hsv_means, hsv_variances = ["full", "full", "full"], i
 		for primary_divider in np.arange(width/max_tile_size)[:-1]+1:
 			contrast = 0
 			#here we slice just the divider rows (last row of last tile and first row of next tile) to lessen the load
-			divider_rows = img[:,primary_divider*max_tile_size-1:primary_divider*max_tile_size+1,:]
+			segment_start = int(primary_divider*max_tile_size-1)
+			segment_end = int(primary_divider*max_tile_size+1)
+			divider_rows = img[:,segment_start:segment_end,:]
 			divider_rows = cv2.cvtColor(divider_rows,cv2.COLOR_HSV2RGB) #no direct HSV2LAB conversion so we have to do this :-/
 			divider_rows = cv2.cvtColor(divider_rows,cv2.COLOR_RGB2LAB)
 			for i in np.arange(height):
